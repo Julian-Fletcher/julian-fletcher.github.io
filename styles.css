@@ -2,10 +2,16 @@
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    padding: 15px 15px 15px 15px;
+    padding: 2rem;
 }
 
+.text-center{
+    text-align: center;
+}
 
+body{
+    margin: 0;
+}
 /* -------------------------NAVBAR------------------------- */
 .navbar{
     display: block;
@@ -45,6 +51,10 @@
 }
 
 /* -------------------------HOME------------------------- */
+#home{
+    background-color: #edeeef;
+}
+
 #profile{
     height: 20rem;
     width:  20rem;
@@ -54,7 +64,6 @@
     border-style: solid;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .intro{
@@ -78,7 +87,6 @@
     padding-left: 5rem;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.2rem;
-    /*background-color: #edeeef;*/
 }
 
 .featured-projects h2{
@@ -87,9 +95,25 @@
 
 /* -------------------------SKILLS------------------------- */
 #skills{
-
+    font-family: 'Open Sans', sans-serif;
+}
+.skill-intro{
+    margin-bottom: 8rem;
 }
 
+.heading{
+    font-size: 3rem;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+}
+
+.description{
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+
+/* -----------------------SKILL ICONS----------------------- */
 .l-img{ /*Images for languages*/
     max-width:250px;
     max-height: 150px;
@@ -140,3 +164,19 @@
     transform: rotateX(0deg);
 }
 
+/* ----------------------- FOOTER ----------------------- */
+footer{
+    background-color: #DCDCDC;
+}
+#social{
+    margin: 24px;
+    padding: 0;
+    font-size: 20px;
+    list-style: none;
+    width: auto;
+    overflow: hidden;
+}
+#social li{
+    display: inline-block;
+    padding: 14px 16px;
+}

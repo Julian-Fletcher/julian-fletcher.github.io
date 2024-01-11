@@ -1,8 +1,10 @@
-/* -------------------------GENERAL STYLES EY------------------------- */
+/* -------------------------GENERAL STYLES------------------------- */
 body{
     background-color: #edeeef;
+    /*
     font-size: 1rem;
     line-height: 1.5;
+    */
 }
 .container{
     width: 100%;
@@ -11,7 +13,7 @@ body{
     margin-right: auto;
     margin-left: auto;
 }
-.lead{
+.section-description{
     font-size: 1.25rem;
     font-weight: 300;
 }
@@ -47,12 +49,10 @@ ul#nav li{  /*styles navbar*/
 #home li a:hover{
     color: #3f8efc;
 }
-/* -------------------------HOME PAGE ------------------------- */
+/* -------------------------HOME/LANDING------------------------- */
 #home{
-    background: url("/Images/Field.JPG") no-repeat top center;
-    background-size:initial;
-    -webkit-background-size: cover;
-    color:white;
+
+    background-color: white;
 }
 #social{
     margin: 24px;
@@ -67,9 +67,7 @@ ul#nav li{  /*styles navbar*/
     display: inline-block;
     padding: 14px 16px;
 }
-#name{
-    font-family: 'Ramabhadra', sans-serif;
-}
+
 .center{
     display:flex;
     justify-content: center;
@@ -90,7 +88,7 @@ ul#nav li{  /*styles navbar*/
     color:black;
     padding-top: 4rem;
     padding-bottom: 6rem;
-    font-family: 'Ramabhadra' sans-serif;
+    font-family: sans-serif;
 }
 #bio{
     margin-bottom: 1rem;

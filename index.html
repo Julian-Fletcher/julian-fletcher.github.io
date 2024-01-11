@@ -1,206 +1,153 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Julian Fletcher</title>
 
-    <!-- BOOTSTRAP THINGS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <!-- My CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
-    <script src="https://kit.fontawesome.com/dd0c30e153.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Ramabhadra&display=swap" rel="stylesheet">
 
-
-    <title>Julian Fletcher | Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="Images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Ramabhadra&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="images/">
+    <script src="https://kit.fontawesome.com/dd0c30e153.js" crossorigin="anonymous"></script>
     <script src="index.js"></script>
+
     <style>
-        #name{
-            font-size: 90px;
-        }
         /*{
             border-radius: .5px;
             border-style: solid;
             border-color: red;
         }*/
-
     </style>
 </head>
-
 <body>
-<header id="home"class="container-fluid" style="height: 100vh; width: 100%;">
-    <nav style="display:block;">
-        <ul id="nav">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#skills">SKILLS</a></li>
-            <li><a href="#projects">PROJECTS</a></li>
-            <li><a href="#contact">CONTACT</a></li>
-        </ul>
-    </nav>
-    <hr>
-    <div class="banner">
-        <div class="banner-text">
-            <h1 id="name">Julian Fletcher</h1>
-            <ul id="social">
-                <li><a href="https://github.com/Julian-Fletcher" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jflec" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a></li>
-                <li><a href="mailto:juliannoah2004@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-sharp fa-solid fa-envelope"></i></a></li>
+    <header>
+        <nav class="navbar">
+            <ul class="navbar-top">
+                <li><a class="navtext" href="index.html">Home</a></li>
+                <li><a class="navtext" href="projects.html">Projects</a></li>
+                <li><a class="navtext" href="index.html">About</a></li>
             </ul>
-        </div>
-    </div>
-</header>
+        </nav>
+        <hr style="margin: 0">
+    </header>
 
-<main>
-    <section id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-lg-4">
-                    <img id="profile" src="/Images/Meb.jpg" alt="A picture of me">
+    <main>
+        <section id="home">
+            <div class="content">
+                <div class="intro">
+                    <div class="col">
+                        <img id="profile" src="/images/julian.jpg" alt="A picture of me">
+                    </div>
+                    <div class="col bio">
+                        <h1>Hi,</h1>
+                        <p>My name is Julian, this website is a showcase for some of my projects.</p>
+                        <p>
+                            I'm a junior at the University of Missouri where I study computer science. I'm interested in
+                            geographic information systems, data visualization, machine learning, and high performance computing.
+                        </p>
+                        <p>
+                            I'm looking for summer internships. If you think I'm a good fit, feel free to reach out.
+                        </p>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-lg-8" id="bio">
-                    <h3>Julian Fletcher</h3>
-                    <b>Mizzou '26 Computer Science Student</b>
-                    <p>I'm an undergrad pursuing a degree in Computer Science from the University of Missouri.
-                        <br>
-                        I'm interested in geographic information systems, data visualization, machine learning, and high performance computing.
-                    </p>
-                    <p>
-                        Currently, I'm in my 2nd year of school, but I'm looking for summer internships or co-ops.
-                        If you think I'm a good fit, you can reach me at
-                        <a href="mailto:julian.n.fletcher@outlook.com">julian.n.fletcher@outlook.com</a>.
-                    </p>
+                <hr>
+                <div class="featured-projects">
+                    <h2>Featured Projects</h2>
+                    <p>Here are a few of my favorite projects.</p>
+                    <ul>
+                        <li><a href="https://github.com/Julian-Fletcher/data-structures">Data Structures in C</a></li>
+                        <li><a href="https://github.com/Julian-Fletcher/BallBounce">BallBounce</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills">
-        <div class="container">
-            <div class="container section-heading text-center">
+        <section id="skills">
+            <div class="content">
+                <div class="text-center skill-intro">
+                    <h2 class="heading">Skills</h2>
+                    <p class="description">Below are some of my skills. Hover to learn more.</p>
+                </div>
                 <div>
-                    <h2>Skills</h2>
-                </div>
-            </div>
-            <div class="container text-center mb-5">
-                <p class="lead">Below are some of my skills, I'm always looking to learn more.</p>
-            </div>
 
-            <div class="row">
-                <div class=" col-md-12 flip-container" style="text-align: center;">
 
+                <div class="flip-container">
                     <div class="flip-box">
-                        <div class="fb-front" id="c">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/c.png" alt="C Programming Language">
-                            </a>
+                        <div class="fb-front">
+                            <img class="l-img" src="images/logos/c.png" alt="C Programming Language">
                         </div>
-                        <div class="fb-back" id="c-b">
+                        <div class="fb-back">
                             <p>I've been programing in C for two years, and I am exploring multithreading in the language.</p>
                         </div>
                     </div>
 
-                    <div class="flip-box" id="python">
+                    <div class="flip-box">
                         <div class="fb-front">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/python.png" alt="Python">
-                            </a>
+                            <img class="l-img" src="images/logos/python.png" alt="Python">
                         </div>
                         <div class="fb-back">
                             <p>Python text.</p>
                         </div>
                     </div>
 
-                    <div class="flip-box" id="HTML">
+                    <div class="flip-box">
                         <div class="fb-front">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/html.png" alt="HTML">
-                            </a>
+                            <img class="l-img" src="images/logos/html.png" alt="HTML">
                         </div>
                         <div class="fb-back">
                             <p>HTML text</p>
                         </div>
                     </div>
 
-                    <div class="flip-box" id="CSS">
+                    <div class="flip-box">
                         <div class="fb-front">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/css.png" alt="CSS">
-                            </a>
+                            <img class="l-img" src="images/logos/css.png" alt="CSS">
                         </div>
                         <div class="fb-back">
                             <p>CSS</p>
                         </div>
-
                     </div>
 
-                    <div class="flip-box" id="JS">
+                    <div class="flip-box">
                         <div class="fb-front">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/js.svg" alt="Javascript">
-                            </a>
+                            <img class="l-img" src="images/logos/js.svg" alt="Javascript">
                         </div>
                         <div class="fb-back">
                             <p>JS</p>
                         </div>
-
                     </div>
 
-                    <div class="flip-box" id="nJS">
+                    <div class="flip-box">
                         <div class="fb-front">
-                            <a class="languages">
-                                <img class="l-img" src="Images/logos/nodejs.svg" alt="NodeJS">
-                            </a>
+                            <img class="l-img" src="images/logos/nodejs.svg" alt="NodeJS">
                         </div>
                         <div class="fb-back">
                             <p>NodeJS</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" id="projects">
-        <div class="container">
-            <div class="container section-heading text-center">
-                <div>
-                    <h2>Projects</h2>
                 </div>
             </div>
-            <div class="container text-center mb-5">
-                <p class="lead">Here you can see some of the projects I've worked on in my personal time.</p>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-lg-4">
-                    <a class="portfolio-item" data-toggle="modal" href="#portfolioModal1">
-                                <span class="caption">
-                                    <span class="caption-content">
-                                        <h4>Personal Website</h4>
-                                        <p class="mb-0">My personal website and portfolio.</p>
-                                    </span>
-                                </span>
-                        <img class="img-fluid portfolio-image" src="Images/website.PNG" alt="Image for my website">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-<footer class="footer">
+        </section>
+    </main>
 
-</footer>
-
-
-
-<script src="index.js"></script>
-<!-- BOOTSTRAP -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!--
+    <footer>
+        <h2>Julian Fletcher</h2>
+        <ul id="social">
+            <li><a href="https://github.com/Julian-Fletcher" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/jflec" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="mailto:juliannoah2004@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-sharp fa-solid fa-envelope"></i></a></li>
+        </ul>
+    </footer>
+    -->
 </body>
 </html>
