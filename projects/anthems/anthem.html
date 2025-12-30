@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Today's Anthem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px 20px;
+            transition: background 0.5s ease;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            opacity: 0.9;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .songs-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            width: 100%;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .album-art-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            flex-shrink: 0;
+        }
+
+        .album-art {
+            width: 220px;
+            height: 220px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .album-art-placeholder {
+            width: 220px;
+            height: 220px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .album-art-placeholder svg {
+            width: 64px;
+            height: 64px;
+            opacity: 0.3;
+            color: white;
+        }
+
+        .song-info {
+            flex: 1;
+            color: white;
+        }
+
+        .song-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .artist-name {
+            font-size: 1.15rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .listen-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+
+        .streaming-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stream-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .stream-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .stream-btn.spotify {
+            background: #1DB954;
+            color: white;
+        }
+
+        .stream-btn.spotify:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(29, 185, 84, 0.4);
+        }
+
+        .stream-btn.youtube {
+            background: #FF0000;
+            color: white;
+        }
+
+        .stream-btn.youtube:hover {
+            background: #ff1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .stream-btn.apple {
+            background: linear-gradient(135deg, #FA233B, #FB5C74);
+            color: white;
+        }
+
+        .stream-btn.apple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(250, 35, 59, 0.4);
+        }
+
+        /* Loading state */
+        .loading .loading-spinner {
+            display: block;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .song-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px;
+                gap: 24px;
+            }
+
+            .album-art-container,
+            .album-art,
+            .album-art-placeholder {
+                width: 180px;
+                height: 180px;
+            }
+
+            .song-title {
+                font-size: 1.5rem;
+            }
+
+            .streaming-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <p class="page-title">Songs of the Day</p>
+    
+    <div id="songsContainer" class="songs-container">
+        <!-- Song cards will be dynamically inserted here -->
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURE YOUR SONGS OF THE DAY HERE
+        // Add as many YouTube Music links as you want!
+        // The gradient will be based on the first song.
+        // ============================================
+        const YOUTUBE_MUSIC_URLS = [
+            "https://music.youtube.com/watch?v=aSFE6WsglUM&si=ELZmbu9G0jLBQby8",
+			"https://music.youtube.com/watch?v=5Ey7DGqjmVg&si=t07M5UbKMtPMntp3"
+            
+        ];
+        // ============================================
+
+        // SVG icons as strings for dynamic insertion
+        const ICONS = {
+            spotify: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`,
+            youtube: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm5.568 16.32c-.168.456-.672.792-1.14.852-1.884.216-3.78.216-5.664.216s-3.78 0-5.664-.216c-.468-.06-.972-.396-1.14-.852-.312-.852-.312-2.616-.312-3.516s0-2.664.312-3.516c.168-.456.672-.792 1.14-.852 1.884-.216 3.78-.216 5.664-.216s3.78 0 5.664.216c.468.06.972.396 1.14.852.312.852.312 2.616.312 3.516s0 2.664-.312 3.516zM9.6 14.904V9.096L15.12 12 9.6 14.904z"/></svg>`,
+            apple: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>`,
+            music: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>`
+        };
+
+        // Extract video ID from YouTube Music URL
+        function extractVideoId(url) {
+            const patterns = [
+                /music\.youtube\.com\/watch\?v=([^&]+)/,
+                /youtube\.com\/watch\?v=([^&]+)/,
+                /youtu\.be\/([^?]+)/
+            ];
+            
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) return match[1];
+            }
+            return null;
+        }
+
+        // Fetch song data using oEmbed (no API key needed)
+        async function fetchSongData(videoId) {
+            try {
+                const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+                const response = await fetch(oembedUrl);
+                
+                if (!response.ok) throw new Error('Failed to fetch video data');
+                
+                const data = await response.json();
+                
+                let title = data.title;
+                let artist = data.author_name;
+                
+                const separators = [' - ', ' – ', ' — '];
+                for (const sep of separators) {
+                    if (title.includes(sep)) {
+                        const parts = title.split(sep);
+                        if (parts.length === 2) {
+                            if (parts[1].toLowerCase().includes(artist.toLowerCase()) || 
+                                artist.toLowerCase().includes(parts[1].toLowerCase())) {
+                                title = parts[0].trim();
+                                artist = parts[1].trim();
+                            } else if (parts[0].toLowerCase().includes(artist.toLowerCase()) ||
+                                       artist.toLowerCase().includes(parts[0].toLowerCase())) {
+                                title = parts[1].trim();
+                                artist = parts[0].trim();
+                            } else {
+                                title = parts[0].trim();
+                                artist = parts[1].trim();
+                            }
+                        }
+                        break;
+                    }
+                }
+                
+                title = title.replace(/\s*[\(\[]?(official\s*)?(music\s*)?(video|audio|lyric|lyrics|visualizer|hd|4k)[\)\]]?\s*/gi, '').trim();
+                title = title.replace(/\s*[\(\[].*?[\)\]]\s*$/, '').trim();
+                
+                const thumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                const thumbnailFallback = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                
+                return {
+                    title: title,
+                    artist: artist,
+                    thumbnail: thumbnail,
+                    thumbnailFallback: thumbnailFallback,
+                    videoId: videoId
+                };
+            } catch (error) {
+                console.error('Error fetching song data:', error);
+                throw error;
+            }
+        }
+
+        // Generate streaming links
+        function generateStreamingLinks(songData) {
+            const searchQuery = encodeURIComponent(`${songData.title} ${songData.artist}`);
+            
+            return {
+                youtube: `https://music.youtube.com/watch?v=${songData.videoId}`,
+                spotify: `https://open.spotify.com/search/${searchQuery}`,
+                apple: `https://music.apple.com/search?term=${searchQuery}`
+            };
+        }
+
+        // Extract dominant colors from image
+        function extractColors(img) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const size = 100;
+                canvas.width = size;
+                canvas.height = size;
+                
+                try {
+                    ctx.drawImage(img, 0, 0, size, size);
+                    const imageData = ctx.getImageData(0, 0, size, size);
+                    const pixels = imageData.data;
+                    
+                    const colorBuckets = {};
+                    
+                    for (let i = 0; i < pixels.length; i += 16) {
+                        const r = Math.round(pixels[i] / 32) * 32;
+                        const g = Math.round(pixels[i + 1] / 32) * 32;
+                        const b = Math.round(pixels[i + 2] / 32) * 32;
+                        const key = `${r},${g},${b}`;
+                        colorBuckets[key] = (colorBuckets[key] || 0) + 1;
+                    }
+                    
+                    const sortedColors = Object.entries(colorBuckets)
+                        .sort((a, b) => b[1] - a[1])
+                        .slice(0, 10)
+                        .map(([key]) => {
+                            const [r, g, b] = key.split(',').map(Number);
+                            return { r, g, b };
+                        });
+                    
+                    const validColors = sortedColors.filter(c => {
+                        const brightness = (c.r + c.g + c.b) / 3;
+                        return brightness > 30 && brightness < 240;
+                    });
+                    
+                    const toHex = (c) => `#${c.r.toString(16).padStart(2, '0')}${c.g.toString(16).padStart(2, '0')}${c.b.toString(16).padStart(2, '0')}`;
+                    
+                    if (validColors.length >= 3) {
+                        resolve({
+                            primary: toHex(validColors[0]),
+                            secondary: toHex(validColors[1]),
+                            accent: toHex(validColors[2])
+                        });
+                    } else {
+                        resolve({
+                            primary: '#1a1a2e',
+                            secondary: '#16213e',
+                            accent: '#0f3460'
+                        });
+                    }
+                } catch (e) {
+                    resolve({
+                        primary: '#1a1a2e',
+                        secondary: '#16213e',
+                        accent: '#0f3460'
+                    });
+                }
+            });
+        }
+
+        // Apply gradient background
+        function applyGradient(colors) {
+            const darken = (hex, amount) => {
+                const num = parseInt(hex.slice(1), 16);
+                const r = Math.max(0, (num >> 16) - amount);
+                const g = Math.max(0, ((num >> 8) & 0x00FF) - amount);
+                const b = Math.max(0, (num & 0x0000FF) - amount);
+                return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
+            };
+            
+            document.body.style.background = `
+                linear-gradient(
+                    135deg,
+                    ${darken(colors.accent, 40)} 0%,
+                    ${darken(colors.primary, 30)} 50%,
+                    ${darken(colors.secondary, 20)} 100%
+                )
+            `;
+        }
+
+        // Create a song card element
+        function createSongCard(index) {
+            const card = document.createElement('div');
+            card.className = 'song-card';
+            card.id = `song-card-${index}`;
+            card.innerHTML = `
+                <div class="album-art-container">
+                    <img 
+                        id="albumArt-${index}"
+                        class="album-art" 
+                        src="" 
+                        alt="Album Art"
+                        style="display: none;"
+                    >
+                    <div id="albumArtPlaceholder-${index}" class="album-art-placeholder loading">
+                        <div class="loading-spinner"></div>
+                        <span class="placeholder-icon" style="display: none;">${ICONS.music}</span>
+                    </div>
+                </div>
+                
+                <div class="song-info">
+                    <h1 id="songTitle-${index}" class="song-title">Loading...</h1>
+                    <p id="artistName-${index}" class="artist-name"></p>
+                    
+                    <p class="listen-label">Listen on</p>
+                    <div class="streaming-buttons">
+                        <a id="spotifyLink-${index}" href="#" class="stream-btn spotify" target="_blank" rel="noopener">
+                            ${ICONS.spotify}
+                            Spotify
+                        </a>
+                        
+                        <a id="youtubeLink-${index}" href="#" class="stream-btn youtube" target="_blank" rel="noopener">
+                            ${ICONS.youtube}
+                            YouTube
+                        </a>
+                        
+                        <a id="appleLink-${index}" href="#" class="stream-btn apple" target="_blank" rel="noopener">
+                            ${ICONS.apple}
+                            Apple
+                        </a>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Update a song card with data
+        function updateSongCard(index, songData, links, isFirst) {
+            document.getElementById(`songTitle-${index}`).textContent = songData.title;
+            document.getElementById(`artistName-${index}`).textContent = songData.artist;
+            
+            const albumArt = document.getElementById(`albumArt-${index}`);
+            const placeholder = document.getElementById(`albumArtPlaceholder-${index}`);
+            
+            albumArt.onerror = () => {
+                albumArt.src = songData.thumbnailFallback;
+            };
+            
+            albumArt.onload = async () => {
+                placeholder.style.display = 'none';
+                albumArt.style.display = 'block';
+                
+                // Only extract colors from the first song
+                if (isFirst) {
+                    const colors = await extractColors(albumArt);
+                    applyGradient(colors);
+                }
+            };
+            
+            albumArt.crossOrigin = 'anonymous';
+            albumArt.src = songData.thumbnail;
+            
+            document.getElementById(`spotifyLink-${index}`).href = links.spotify;
+            document.getElementById(`youtubeLink-${index}`).href = links.youtube;
+            document.getElementById(`appleLink-${index}`).href = links.apple;
+        }
+
+        // Show error on a card
+        function showCardError(index, message) {
+            document.getElementById(`songTitle-${index}`).textContent = 'Error';
+            document.getElementById(`artistName-${index}`).textContent = message;
+            const placeholder = document.getElementById(`albumArtPlaceholder-${index}`);
+            placeholder.classList.remove('loading');
+            placeholder.querySelector('.placeholder-icon').style.display = 'block';
+        }
+
+        // Initialize
+        async function init() {
+            const container = document.getElementById('songsContainer');
+            
+            // Update title based on number of songs
+            const pageTitle = document.querySelector('.page-title');
+            pageTitle.textContent = YOUTUBE_MUSIC_URLS.length === 1 ? 'Today\'s Anthem' : 'Today\'s Anthems';
+            
+            // Create cards for each song
+            YOUTUBE_MUSIC_URLS.forEach((_, index) => {
+                container.appendChild(createSongCard(index));
+            });
+            
+            // Fetch and populate each song
+            for (let i = 0; i < YOUTUBE_MUSIC_URLS.length; i++) {
+                const url = YOUTUBE_MUSIC_URLS[i];
+                const videoId = extractVideoId(url);
+                
+                if (!videoId) {
+                    showCardError(i, 'Invalid YouTube Music URL');
+                    continue;
+                }
+                
+                try {
+                    const songData = await fetchSongData(videoId);
+                    const links = generateStreamingLinks(songData);
+                    updateSongCard(i, songData, links, i === 0);
+                } catch (error) {
+                    showCardError(i, 'Failed to load song data');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
