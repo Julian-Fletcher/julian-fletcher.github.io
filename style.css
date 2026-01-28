@@ -15,6 +15,8 @@ body{
 
 section{
     padding-top: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .section-heading{
@@ -30,16 +32,6 @@ section{
     font-size: 3rem;
     margin-bottom: .5rem;
     margin-top: 0;
-}
-
-/* .content-section{
-    padding-top: 7.5rem;
-    padding-bottom:7.5rem;
-} */
-
-section{
-    padding-left: 2rem;
-    padding-right: 2rem;
 }
 
 /* -------------------------NAVBAR------------------------- */
@@ -191,25 +183,25 @@ ul#nav li{  /*styles navbar*/
     
 }
 
-/* -------------------------PROJECTS------------------------- */
+/* -------------------------PROJECTS (Grid)------------------------- */
 #projects{
     /* padding-top:5rem; */
     padding-bottom: 5rem;
 }
 
-.project_container{
+.project-container {
     display: flex;
-    flex-direction: row;
     max-width: 100%;
-    justify-content: space-between;
     padding: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.pbox{
-    margin-left: 1rem;
-    min-width: 30%;
-    max-width: 50%;
+.pbox {
+    flex-grow: 1;
+    flex-basis: calc(33.333% - 2rem);
     margin-bottom: 2rem;
+    background: #fff; /* Ensure contrast if images fail */
 }
 
 .pimg{
@@ -217,48 +209,146 @@ ul#nav li{  /*styles navbar*/
     justify-content: center;
     text-align: center;
     color: white;
+    /* Fallback background */
+    background-color: #333; 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .ptxt{
     margin-top: 1rem;
+    padding: 0 1rem 1rem 1rem;
 }
 
-#cpp{
-    background: url(Images/Bg1.JPG);
+/* Specific Project Images */
+#dij{
+    color: black;
+    background-image: url('project_files/new_algorithm.png');
 }
 
-#bit{
-    background: url(Images/Bg1.JPG);
+#sig{
+    background-image: url('Images/Bg1.JPG');
 }
+
+/* --- UPDATED SECTIONS WITH SHADOWS --- */
 
 #gis1{
     color: black;
-    background: url(project_files/3040/3040_cover.PNG) center left;
+    background-image: url('Images/3040_cover.PNG');
+    background-position: center;
+    background-size: cover;
+    /* White glow/shadow for black text to stand out */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9), 0px 0px 20px white;
 }
 
 #gis2{
-    background: url(project_files/4940/4940_cover.PNG);
-}
-
-#dij{
-    background: url(Images/Bg1.JPG);
+    background-image: url('Images/4940_cover.PNG');
+    background-position: center;
+    background-size: cover;
+    /* Strong black shadow for white text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0px 0px 5px black;
 }
 
 #rs1{
 	color: black;
 	background: url(project_files/3380/3380_cover.PNG) center;
-	
+    background-size: cover;
 }
 
-
 @media only screen and (max-width: 768px) {
-    .project_container{
+    .project-container{
         flex-direction: column;
     }
     .pbox{
         max-width: 100%;
     }
 }
+
+/* ------------------------- RESEARCH (List/Academic) ------------------------- */
+#research {
+    padding-bottom: 5rem;
+    background-color: #f9f9f9; /* Slight distinction from body */
+}
+
+.research-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.research-entry {
+    background: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid #3f8efc; /* Accent color */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.research-entry:hover {
+    transform: translateX(5px);
+}
+
+.research-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.research-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+    font-weight: 700;
+}
+
+.research-date {
+    font-weight: 600;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.research-meta {
+    color: #555;
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.research-desc {
+    margin-bottom: 1.5rem;
+    color: #444;
+}
+
+.research-links a {
+    text-decoration: none;
+    color: #3f8efc;
+    font-weight: bold;
+    margin-right: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.research-links a:hover {
+    text-decoration: underline;
+}
+
+.tech-tag {
+    display: inline-block;
+    background: #edeeef;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #666;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+
+/* ------------------------- UTILITIES ------------------------- */
 
 @media only screen and (max-width: 425px) {
     #name{
@@ -273,14 +363,13 @@ ul#nav li{  /*styles navbar*/
 }
 
 @media only screen and (max-width: 320px){
-	.pimg{
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
+    .pimg{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
-
 
 /* ================== RESUME ================ */
 .bio-link{
-	color: black;
+    color: black;
 }
