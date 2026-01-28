@@ -11,7 +11,7 @@ let endBase = null;     // Base to convert to
 // DOM elements
 const label = document.getElementById("number");  // P element number will be shown in
 
-const menu = document.getElementById("menu-div"); // Main menu div
+const menu = document.getElementById("menu"); // Main menu div
 const game = document.getElementById("game");     // Game div
 
 const form = document.getElementById("inputForm");
@@ -145,6 +145,7 @@ function changeNum(base){
         // Update label with number and its base
         const subscript = document.createElement("sub");
         subscript.textContent = String(base);
+		subscript.style.fontSize = "1rem";
 
         label.innerHTML = String(number);
 
@@ -154,7 +155,7 @@ function changeNum(base){
 }
 
 function returnToMenu(){
-    menu.style.display = "block";
+    menu.style.display = "flex";
     game.style.display = "none"; 
     correct = 0;
     incorrect = 0;

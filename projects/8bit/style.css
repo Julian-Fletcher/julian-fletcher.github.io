@@ -1,15 +1,23 @@
 body{
-    background-color: white;
-    font-family: Arial, sans-serif;
+	background: rgb(83,9,121);
+	background: linear-gradient(17deg, rgba(83,9,121,1) 35%, rgba(41,104,226,1) 77%, rgba(29,131,255,1) 100%);
+	font-family: Arial, sans-serif;
 }
 
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* ====================== GAME CSS ===================== */
 #main{
     margin: auto;
     width: 50%;
     padding: 15px;
-    /*border: 2px solid blue;*/
+    /* border: 2px solid blue; */
     justify-content: center;
-    
 }
 
 #game{
@@ -26,7 +34,9 @@ body{
     margin-top: 25px;
 }
 
-
+#sub{
+	font-size: 1rem;
+}
 
 input[type=text]{
     width: 100%;
@@ -43,19 +53,34 @@ input[type=text]:focus{
     border: 3px solid black;
 }
 
-/* Menu */
+/* ================== MENU STYLES ================== */
+
+header{
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 #menu-div{
-    width: 1000px;
-    height: 400px;
-    padding: 20px;
-    margin: auto;
-    background-color: white;
-    border: 1px solid black;
+    width: auto;
+    height: auto;
+    padding: 60px;
+    background-color: #f7f7f7;
     border-radius: 20px;
     display: block;
     text-align: center;
 }
 
+#menu-div h1{
+	margin-top: 0rem;
+	margin-bottom: .5rem;
+}
+
+#menu-div p{
+	margin-top: 0rem;
+	margin-bottom: .5rem;
+}
 
 .button-grid{
     display: grid;
@@ -65,19 +90,31 @@ input[type=text]:focus{
 }
 
 .grid-item{
-    padding: 20px;
+    margin: 1rem;
     text-align: center;
+}
+
+.mode-button{
+    min-width: 10rem;
+    padding: 1.2rem;
+    border: none;
+    background-color: white;
+    box-shadow: 0px 0px .8rem rgba(0,0,0,0.5);
+    font-size: 1rem;
+
+    /* Hover effect */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.mode-button:hover{
+    transform: scale(1.2);
 }
 
 button{
     padding: 20px;
     border-radius: 10px;
-
 }
 
-button:hover {
-    background-color: gray;
-}
 
 
 .display-container {
@@ -89,8 +126,22 @@ button:hover {
 }
 
 @media screen and (max-width: 768px){
-    .button-grid{
+    
+	#menu-grid{
+		padding: .2rem;
+	}
+
+	.button-grid{
         display: block;
+        width: 100%;
+    }
+
+    .grid-item{
+        margin: 0rem;
+        margin-bottom: 1rem;
+    }
+
+    .mode-button{
         width: 100%;
     }
 
