@@ -13,6 +13,10 @@ body{
     margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
 section{
     padding-top: 3rem;
     padding-left: 2rem;
@@ -44,7 +48,12 @@ ul#nav{
     width: auto;
 }
 ul#nav li{  /*styles navbar*/
-    font-family: 'Ramabhadra', sans-serif;
+    /* Noto 400 */
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
     display: inline-block;
     text-align: center;
     padding: 14px 16px 0px 16px;
@@ -57,6 +66,52 @@ ul#nav li{  /*styles navbar*/
 #home li a:hover{
     color: #3f8efc;
 }
+
+/* -------------------------STICKY NAVBAR------------------------- */
+.sticky-nav {
+    position: fixed;
+    top: -100px; /* Hidden initially */
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: top 0.3s ease-in-out;
+}
+
+.sticky-nav.visible {
+    top: 0;
+}
+
+ul#nav-sticky {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+}
+
+ul#nav-sticky li {
+    /* Noto 400 */
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    display: inline-block;
+    padding: 0 16px;
+}
+
+ul#nav-sticky li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+ul#nav-sticky li a:hover {
+    color: #3f8efc; /* original blue accent */
+}
+
 /* -------------------------HOME PAGE ------------------------- */
 #home{
     background: url("/images/Field.JPG") no-repeat top center;
@@ -163,24 +218,38 @@ ul#nav li{  /*styles navbar*/
 }
 
 .skill-container{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;;
-    padding-top: auto;
-    padding-bottom: auto;
+    margin-bottom: .2rem;
+    padding: 0 1rem;
+}
+
+.skill-category {
+    text-align: center;
+}
+
+.skill-category h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 0.1rem;
 }
 
 .skill-row{
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .skill-box {
-    display: inline;
+    display: inline-block;
     background: #e6e7e8;
-    padding: .4rem;
-    
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
 }
 
 /* -------------------------PROJECTS (Grid)------------------------- */
@@ -252,8 +321,10 @@ ul#nav li{  /*styles navbar*/
 
 #rs1{
 	color: black;
-	background: url(project_files/3380/3380_cover.PNG) center;
+	background-image: url('Images/3380_cover.png');
+    background-position: center;
     background-size: cover;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9), 0px 0px 20px white;
 }
 
 @media only screen and (max-width: 768px) {
